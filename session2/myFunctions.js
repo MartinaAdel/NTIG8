@@ -1,8 +1,11 @@
 tasks = null
 myAddForm = document.querySelector('#form-div form')
+myAddFormBtn = document.querySelector('#form-div form button')
 let showHide = document.querySelector('#showHide')
 form_div = document.querySelector('#form-div')
 p = document.querySelector('#content-wrapper')
+updatedTaskID = -1
+
 
 const getAllTasks = ( ) =>{
     try { 
@@ -21,6 +24,7 @@ const createCustomElements = function(parent, elementTag, classes, textContent, 
     parent.appendChild(myNewElement)
     return myNewElement
 }
+
 changeStatus = (index) =>{
     let allDivs = document.querySelectorAll('.x')
     allDivs[index].classList.toggle('bg-warning')
@@ -38,7 +42,7 @@ showSingleTask = (element, i)=>{
     btn1 = createCustomElements(mainDiv2,'button','btn btn-danger mx-2','delete', [])
     btn1.addEventListener('click', function(e){ deletebtn(element.ind, e)})
     btn2 = createCustomElements(mainDiv2,'button','btn btn-warning mx-2','edit', [])
-    btn2.addEventListener('click', function(e){ alert (i)})
+    btn2.addEventListener('click', function(e){ editBtn (i)})
     btn3 = createCustomElements(mainDiv2,'button','btn btn-primary mx-2','change status', [])
     btn3.addEventListener('click', function(e){ changeStatus(i) })
 }
@@ -62,15 +66,40 @@ deletebtn = (ind, e) =>{
    saveAllTasks(tasks)
 
 }
+showTaskData=(i)=>{
+    let formControls = document.querySelectorAll('.form-control')
+    formControls[0].value=tasks[i].taskTitle
+    formControls[1].value=tasks[i].taskType
+    formControls[2].value=tasks[i].taskContent
+    formControls[3].value=tasks[i].startDate
+    formControls[4].value=tasks[i].dueDate
+    updatedTaskID = i
+}
+editBtn =(i) => {
+    form_div.classList.toggle('d-none')
+    showHide.textContent == "Show" ? showHide.textContent='Hide': showHide.textContent='Show'
+    myAddFormBtn.textContent='update Task'
 
-addTask = (task) =>{
-    tasks.length == 0 ? task.ind = 0: task.ind = tasks[tasks.length-1].ind+1;
-  //  console.log(task.ind)
+    showTaskData(i)
+}
+addTask = (task,updatedTaskID=-1) =>{
+    if(updatedTaskID==-1){
+        tasks.length == 0 ? task.ind = 0: task.ind = tasks[tasks.length-1].ind+1;
+    }
+    else{
+        task.ind = updatedTaskID
+    }
+      console.log(task.ind)
 //    task.ind = tasks.length
     tasks.push(task)
     saveAllTasks()
     myAddForm.reset()
     form_div.classList.add('d-none')
     showHide.textContent="Show"
-    showSingleTask(task, tasks.length-1)
+    if(updatedTaskID==-1 ){ showSingleTask(task, tasks.length-1) }
+    else{
+        showSingleTask(task, updatedTaskID)
+        location.reload();
+    
+    }
 }

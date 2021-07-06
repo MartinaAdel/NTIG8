@@ -7,6 +7,7 @@ let formHeads = [
 showHide.addEventListener('click', function(e){
     form_div.classList.toggle('d-none')
     this.textContent == "Show" ? this.textContent='Hide': this.textContent='Show'
+    myAddFormBtn.textContent ="add Task" 
 })
 
 myAddForm.addEventListener('submit', function(e){
@@ -16,5 +17,14 @@ myAddForm.addEventListener('submit', function(e){
             task[h]= this.elements[h].value
     })
     console.log(task)
-    addTask(task)
+    if(myAddFormBtn.textContent =="add Task"){
+        addTask(task)
+    }
+    else{
+        console.log("updatedTaskID = " + updatedTaskID)
+        tasks = tasks.filter(el=> el.ind!=updatedTaskID)
+        addTask(task,updatedTaskID)
+
+    }
+    
 })
