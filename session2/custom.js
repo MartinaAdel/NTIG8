@@ -8,6 +8,7 @@ showHide.addEventListener('click', function(e){
     form_div.classList.toggle('d-none')
     this.textContent == "Show" ? this.textContent='Hide': this.textContent='Show'
     myAddFormBtn.textContent ="add Task" 
+    
 })
 
 myAddForm.addEventListener('submit', function(e){
@@ -22,8 +23,7 @@ myAddForm.addEventListener('submit', function(e){
     }
     else{
         console.log("updatedTaskID = " + updatedTaskID)
-        tasks = tasks.filter(el=> el.ind!=updatedTaskID)
-        addTask(task,updatedTaskID)
+        udpateTask(task,updatedTaskID)
 
     }
     
