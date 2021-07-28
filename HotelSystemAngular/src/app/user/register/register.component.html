@@ -1,0 +1,62 @@
+<section class="my-3 container">
+    <h2>Register Patient</h2>
+    <form #register="ngForm" (ngSubmit)="handleRegister(register)">
+        <div class="row pb-3">
+            <div class="col-6">
+                <input name="name" placeholder="enter your name" class="form-control" #name="ngModel" 
+                required minlength="5" maxlength="20" 
+                [(ngModel)]="userData.name" >
+                <div class='alert alert-danger' *ngIf="name.invalid && (register.submitted || name.dirty)">
+                    <!-- {{name.errors|json}} -->
+                    <div *ngIf="name.errors?.required">
+                        name is required
+                    </div>
+                    <div *ngIf="name.errors?.minlength">
+                        min len 5
+                    </div>
+                    <div *ngIf="name.errors?.maxlength">
+                        max length 20
+                    </div>
+                </div>
+                <!-- <div class="alert alert-primary">
+                    value: {{name.value}}<br>
+                    touched: {{name.touched}}<br>
+                    dirty: {{name.dirty}}<br>
+                    valid: {{name.valid}}<br>
+                    invalid: {{name.invalid}}
+                </div> -->
+            </div>
+            <div class="col-6">
+                <input name="email" placeholder="enter your email" class="form-control" email required [(ngModel)]="userData.email">
+                <div class="alert alert-danger" *ngIf="emailUsedBefore">
+email used before
+                </div>
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col-6">
+                <input name="password" placeholder="enter your password" class="form-control" [(ngModel)]="userData.password">
+            </div>
+            <div class="col-6">
+                <input name="phone" placeholder="enter your phone" class="form-control" [(ngModel)]="userData.phone">
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col-6" >
+                <label class="form-check-label">Gender: </label> 
+                <input name="gender" type="radio" value="0" class="form-check-input" [(ngModel)]="userData.gender"> Male
+                <input name="gender" type="radio" value="1" class="form-check-input" [(ngModel)]="userData.gender"> Female
+            </div>
+            <div class="col-6">
+                <input name="dateOfBirth" type="date" class="form-control" [(ngModel)]="userData.dateOfBirth">
+            </div>
+        </div>
+        <!-- <input type="checkbox" name="Check"  [(ngModel)]="userData.gender" #x='ngModel' required>
+        <div *ngIf="!x.touched ">invalid</div> -->
+        <div>
+            <button class="btn btn-success" >register</button>
+            <button class="btn btn-danger" (click)="reset($event,register)" type="button">reset</button>
+        </div>
+
+    </form>
+</section>
