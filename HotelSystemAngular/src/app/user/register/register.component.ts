@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 
 
@@ -9,32 +10,34 @@ import { ApiService } from 'src/app/api.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  emailUsedBefore = false
-  userData:any = {
-    name:"",
-    password:"",
-    dateOfBirth:"",
-    email:"",
-    gender:1,
-    phone:"",
-    role:1
-  }
+  contactus = new FormGroup({
+    name:new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]), //Validators.pattern('')
+    email:new FormControl(),
+    message:new FormControl(),
+    phone:new FormControl(),
+  
+  })
+  get name(){ return this.contactus.get('name')}
+  
   constructor(private _user:ApiService) { }
 
   ngOnInit(): void {
   }
-  handleRegister(register:NgForm){
-    if(register.valid){
-      console.log(this.userData)
-      this._user.register(this.userData).subscribe(res=>{
-        if(res.error.email) this.emailUsedBefore=true
-        console.log(res)
-      })
-      register.resetForm()  
-    }
+  handleRegister(){
+    console.log(this.contactus.valid);
+    
+    console.log(this.contactus.value)
+    // if(register.valid){
+    //   console.log(this.userData)
+    //   this._user.register(this.userData).subscribe(res=>{
+    //     if(res.error.email) this.emailUsedBefore=true
+    //     console.log(res)
+    //   })
+    //   register.resetForm()  
+    // }
   }
-  reset(e:Event, reg:NgForm){
+  // reset(){
     // e.preventDefault()
-    reg.resetForm()
-  }
+    // reg.resetForm()
+  // }
 }
