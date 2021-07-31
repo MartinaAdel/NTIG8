@@ -1,3 +1,11 @@
+
+<ul>
+    <li *ngFor="let item of collection | paginate: { itemsPerPage: 3, currentPage: p }"> ... </li>
+  </ul>
+             
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+
 <section class="my-3 container">
     <h2>Register Patient</h2>
     <!-- <form #register="ngForm" (ngSubmit)="handleRegister(register)">

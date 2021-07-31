@@ -10,13 +10,15 @@ const auth = async(req,res,next)=>{
             // accountStatus: true
             'tokens.token': token
         })
-        if(!user) throw new Error()
+        if(!user) throw new Error("unexist user")
         
         const r = await Myroutes.findOne({url_name: req.originalUrl})
+        if(!r) throw new Error("ther is no route with this name")
+        console.log(req.originalUrl)
         let x = r.roles.find(el=>{
            return el.toString() == user.role.toString()
         })
-        if(!x) throw new Error()
+        if(!x) throw new Error("not allow to get this route")
 
         req.user = user
         req.token = token

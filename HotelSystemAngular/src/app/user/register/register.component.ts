@@ -10,6 +10,9 @@ import { ApiService } from 'src/app/api.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  p: number = 1;
+  collection: any[] = [1,2,2,3,4,5,6,7,8,9]; 
+
   contactus = new FormGroup({
     name:new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]), //Validators.pattern('')
     email:new FormControl(),

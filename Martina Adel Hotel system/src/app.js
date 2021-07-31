@@ -7,6 +7,7 @@ const userRoutes = require('../routes/user.route')
 const roomRoutes = require('../routes/room.route')
 const rolesRoutes = require('../routes/roles.routes')
 const routesRoutes = require('../routes/routes.routes')
+const reservationRoutes = require('../routes/reservation.route')
 
 const app = express()
 app.use(cors())
@@ -17,5 +18,6 @@ app.use('/user',userRoutes)
 app.use('/room',roomRoutes)
 app.use('/role',rolesRoutes)
 app.use('/route',routesRoutes)
+app.use('/reservation',reservationRoutes)
 
 module.exports = app

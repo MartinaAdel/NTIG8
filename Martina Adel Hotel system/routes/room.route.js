@@ -5,6 +5,6 @@ const auth = require('../app/middleware/auth')
 
 router.post('/add', auth, roomController.add)
 router.get('/allRooms', auth, roomController.getMyRooms)
-router.post('/changeStatus', auth, roomController.changeStatus)
+router.post('/changeStatus/:id', auth, roomController.changeStatus)
 
 module.exports=router

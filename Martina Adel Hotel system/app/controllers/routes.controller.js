@@ -37,22 +37,22 @@ class MyroutesX {
     }
     static addRole = async (req, res) => {
         try {
-            _id = req.params.id
-            role = req.body.role
+            let _id = req.params.id
+            let role = req.body.role
             let r = await Myroutes.findById(_id)
             r.roles = r.roles.concat(role)
             await r.save()
             res.status(200).send({
                 apiStatus: true,
                 data: r,
-                message: "data fetched"
+                message: "role added successfully"
             })
         }
         catch (e) {
             res.status(500).send({
                 apiStatus: false,
                 data: e.message,
-                message: "error in show all data"
+                message: "error in add role"
             })
         }
     }
