@@ -1,0 +1,19 @@
+
+/*  3.  Header Css
+/*----------------------------------------*/
+.header-section{
+    background: url(../../../public/images/2.jpg)no-repeat scroll center center;
+    background-size: cover;
+  }
+  .book-room-btn a{
+    color:white;
+    font-weight: bold;
+  }
+  .book-room-btn {
+    border:1px white solid ;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
+    text-align: center;
+  }
